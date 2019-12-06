@@ -6,4 +6,8 @@ class Course <ApplicationRecord
   def total_enrolled
     students.count
   end
+
+  def self.sort_alphabetically
+    Course.order(name: :asc)
+  end
 end

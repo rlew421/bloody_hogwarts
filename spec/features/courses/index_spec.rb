@@ -30,4 +30,16 @@ RSpec.describe "courses index page" do
       expect(page).to have_content("Divination: 2")
     end
   end
+
+  it "shows courses in alphabetical order" do
+    herbology = Course.create(name: "Herbology")
+    defence_against_the_dark_arts = Course.create(name: "Defence Against the Dark Arts")
+    transfiguration = Course.create(name: "transfiguration")
+
+    visit '/courses'
+
+    expect(page.find_all('.courses')[0]).to have_content("#{defence_against_the_dark_arts.name}")
+    expect(page.find_all('.courses')[1]).to have_content("#{herbology.name}")
+    expect(page.find_all('.courses')[2]).to have_content("#{transfiguration.name}")
+  end
 end

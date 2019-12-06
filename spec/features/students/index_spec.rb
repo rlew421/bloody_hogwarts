@@ -51,7 +51,7 @@ RSpec.describe "students index page" do
     student_5 = herbology.students.create!(name: "Neville Longbottom", age: 16, house: "Gryffindor")
 
     visit '/students'
-    save_and_open_page
+    
     expect(page.find_all('.students')[0]).to have_content("#{student_1.name}")
     expect(page.find_all('.students')[1]).to have_content("#{student_2.name}")
     expect(page.find_all('.students')[2]).to have_content("#{student_3.name}")

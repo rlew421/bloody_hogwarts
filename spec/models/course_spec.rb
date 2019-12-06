@@ -32,4 +32,15 @@ RSpec.describe Course, type: :model do
       expect(divination.total_enrolled).to eq(2)
     end
   end
+
+  describe 'class methods' do
+    it ".sort_alphabetically" do
+      herbology = Course.create(name: "Herbology")
+      defence_against_the_dark_arts = Course.create(name: "Defence Against the Dark Arts")
+      transfiguration = Course.create(name: "transfiguration")
+
+      expected = ([defence_against_the_dark_arts, herbology, transfiguration])
+      expect(Course.sort_alphabetically).to eq(expected)
+    end
+  end
 end
