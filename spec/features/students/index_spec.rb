@@ -40,4 +40,22 @@ RSpec.describe "students index page" do
 
     expect(page).to have_content("Average age: 26.7")
   end
+
+  it "shows students in alphabetical order" do
+    herbology = Course.create!(name: "Herbology")
+
+    student_1 = herbology.students.create!(name: "Albus Dumbledore", age: 15, house: "Gryffindor")
+    student_2 = herbology.students.create!(name: "Harry Potter", age: 14, house: "Gryffindor")
+    student_3 = herbology.students.create!(name: "Luna Lovegood", age: 15, house: "Ravenclaw")
+    student_4 = herbology.students.create!(name: "Parvati Patil", age: 15, house: "Ravenclaw")
+    student_5 = herbology.students.create!(name: "Neville Longbottom", age: 16, house: "Gryffindor")
+
+    visit '/students'
+    save_and_open_page
+    expect(page.find_all('.students')[0]).to have_content("#{student_1.name}")
+    expect(page.find_all('.students')[1]).to have_content("#{student_2.name}")
+    expect(page.find_all('.students')[2]).to have_content("#{student_3.name}")
+    expect(page.find_all('.students')[3]).to have_content("#{student_5.name}")
+    expect(page.find_all('.students')[4]).to have_content("#{student_4.name}")
+  end
 end
